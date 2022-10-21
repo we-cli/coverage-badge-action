@@ -31,3 +31,11 @@ runs:
         commit_message: "Update badges [skip ci]"
         skip_fetch: true
         skip_checkout: true
+
+    # Without this, will get Error:
+    # Can't find 'action.yml', 'action.yaml' or 'Dockerfile' under '/home/runner/work/coverage-badge-action/coverage-badge-action/action.yml'.
+    # Did you forget to run actions/checkout before running your local action?
+    - name: Checkout Back
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.ref }}
