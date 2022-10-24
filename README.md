@@ -74,5 +74,9 @@
 
     ```diff
     <!-- README.md -->
-    + [![cov](https://fritx.github.io/jayin/badges/coverage.svg)](https://github.com/fritx/jayin/actions)
+    + [![cov](https://we-cli.github.io/jayin/badges/coverage.svg)](https://github.com/we-cli/jayin/actions)
     ```
+
+    and you get:
+    
+    [![cov](https://we-cli.github.io/coverage-badge-action/badges/coverage.svg)](https://github.com/we-cli/coverage-badge-action/actions)

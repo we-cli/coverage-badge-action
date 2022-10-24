@@ -1,6 +1,12 @@
 name: Coverage Badge
 description: Badges for test results and code coverage
 
+# Required for publishing to the marketplace:
+# Improve your Action by adding labels for icon and color.
+branding:
+  icon: check-circle
+  color: green
+
 runs:
   using: composite
   steps:
