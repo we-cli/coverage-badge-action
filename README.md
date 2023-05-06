@@ -79,7 +79,7 @@
 
 5. Give workflow permission:
 
-    You have to configure your repository -`Settings -> Action -> General -> Workflow permissions` and choose `Read and Write permissions`
+    On your repository `Settings -> Action -> General -> Workflow permissions` choose `Read and Write permissions`
 
 
     and you get:
