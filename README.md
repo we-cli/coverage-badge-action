@@ -77,6 +77,11 @@
     + [![cov](https://we-cli.github.io/jayin/badges/coverage.svg)](https://github.com/we-cli/jayin/actions)
     ```
 
+5. Give workflow permission:
+
+    On your repository `Settings -> Action -> General -> Workflow permissions` choose `Read and Write permissions`
+
+
     and you get:
     
     [![cov](https://we-cli.github.io/coverage-badge-action/badges/coverage.svg)](https://github.com/we-cli/coverage-badge-action/actions)
