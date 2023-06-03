@@ -1,4 +1,4 @@
-# coverage-badge-action&nbsp;&nbsp;[![cov](https://we-cli.github.io/coverage-badge-action/badges/coverage.svg)](https://github.com/we-cli/coverage-badge-action/actions)
+# coverage-badge-action&nbsp;&nbsp;[![cov](https://llueder.github.io/coverage-badge-action-pytest/badges/coverage.svg)](https://github.com/llueder/coverage-badge-action-pytest/actions)
 
 
 ## Similar Projects

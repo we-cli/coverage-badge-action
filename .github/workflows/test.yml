@@ -5,17 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
 
-      # Install and Test Example
       - name: Install and Test Example
         run: |
-          cd example
-          npm install
-          npm run test:cov
-          cp -r coverage ..
-          cd ..
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
 
-      # Add this
+      - name: Test
+        run: python -m pytest --cov --cov-report json
+
       - name: Update Coverage Badge
         uses: ./

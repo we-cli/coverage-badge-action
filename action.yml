@@ -14,7 +14,7 @@ runs:
       id: get-values
       shell: bash
       run: |
-        COV=$(node -p 't=require(`./coverage/coverage-summary.json`).total,Math.min(...`lines|statements|functions|branches`.split(`|`).map(k=>t[k].pct))')
+        COV=$(python -c 'import json; print(json.load(open("coverage.json"))["totals"]["percent_covered_display"])')
         echo "coverage=$COV" >> $GITHUB_OUTPUT
 
     - name: Checkout gh-pages
