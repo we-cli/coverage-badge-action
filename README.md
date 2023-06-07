@@ -18,16 +18,23 @@
 1. Make sure you have gh-pages branch and have GitHub Pages on:
 
     ```sh
-    # if you don't have gh-pages yet
+    # if you don't have gh-pages yet, create an empty one
+    git stash save my_wip_state  # if not clean (1)
     git switch --orphan gh-pages
     git commit --allow-empty -m "Initial commit"
     git push -u origin gh-pages
+
+    git checkout my_original_branch
+    git stash apply stash^{/my_wip_state}  # if not clean (2)
     ```
 
     See Step.6 in [🚀 Blog Setup via Github Fork](https://fritx.github.io/silent/?2022/09/blog-setup-via-github-fork)
 
     > 6\. (Important) Select both gh-pages and / (root) in Project Settings -> Pages
 
+1. Give workflow permission:
+
+    On your repository `Settings -> Action -> General -> Workflow permissions` choose `Read and Write permissions`
 
 2. Whatever the coverage tool is, don't forget to have `reporter=json-summary` enabled:
 
@@ -80,11 +87,7 @@
     + [![cov](https://we-cli.github.io/jayin/badges/coverage.svg)](https://github.com/we-cli/jayin/actions)
     ```
 
-5. Give workflow permission:
-
-    On your repository `Settings -> Action -> General -> Workflow permissions` choose `Read and Write permissions`
-
 
     and you get:
-    
+
     [![cov](https://we-cli.github.io/coverage-badge-action/badges/coverage.svg)](https://github.com/we-cli/coverage-badge-action/actions)
