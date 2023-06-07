@@ -60,6 +60,9 @@
 
           # Add this
           - name: Update Coverage Badge
+            # GitHub actions: default branch variable
+            # https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
+            if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
             uses: we-cli/coverage-badge-action@main
     ```
 
