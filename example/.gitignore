@@ -3,3 +3,9 @@ package-lock.json
 pnpm-lock.yaml
 yarn.lock
 coverage
+
+# pytest
+__pycache__
+.pytest_cache
+.coverage
+coverage.json

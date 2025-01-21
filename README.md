@@ -12,6 +12,27 @@
 - ✅ No github-token required
 - ✅ No entire upload to gh-pages
 - ✅ Just patch and push to gh-pages
+- ✅ Supports Node.js & pytest
+
+## Update: supports pytest
+
+    ```yml
+    # .github/workflows/test.yml
+    # ...
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Install
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov
+        pip install -r requirements.txt
+    - name: Test and Coverage
+      run: python -m pytest --cov --cov-report json
+    # ...
+    ```
 
 ## Usage
 

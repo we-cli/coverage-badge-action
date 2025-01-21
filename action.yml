@@ -14,7 +14,14 @@ runs:
       id: get-values
       shell: bash
       run: |
-        COV=$(node -p 't=require(`./coverage/coverage-summary.json`).total,Math.min(...`lines|statements|functions|branches`.split(`|`).map(k=>t[k].pct))')
+        if [ -f "coverage/coverage-summary.json" ]; then
+          COV=$(node -p 't=require(`./coverage/coverage-summary.json`).total,Math.min(...`lines|statements|functions|branches`.split(`|`).map(k=>t[k].pct))')
+        elif [ -f "coverage.json" ]; then
+          COV=$(python -c 'import json; print(json.load(open("coverage.json"))["totals"]["percent_covered_display"])')
+        else
+          echo "Error: Neither coverage/coverage-summary.json nor coverage.json found."
+          exit 1
+        fi
         echo "coverage=$COV" >> $GITHUB_OUTPUT
 
     - name: Checkout gh-pages
