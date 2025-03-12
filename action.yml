@@ -24,6 +24,13 @@ runs:
         fi
         echo "coverage=$COV" >> $GITHUB_OUTPUT
 
+      # pretend to be still https://github.com/stefanzweifel/git-auto-commit-action/blob/master/action.yml
+    - name: Git Config
+      shell: bash
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
     - name: Checkout gh-pages
       uses: actions/checkout@v3
       with:
@@ -31,20 +38,26 @@ runs:
 
     - name: Create Badges
       shell: bash
+      env:
+        COV: ${{ steps.get-values.outputs.coverage }}
       run: |
         npm i -g badgen-cli
-        export COV=${{ steps.get-values.outputs.coverage }}
         COLOR=$(node -p '+process.env.COV >= 95 ? `green` : `orange`')
-        mkdir -p badges
-        badgen -j coverage -s $COV% -c $COLOR > badges/coverage.svg
+        badgen -j coverage -s $COV% -c $COLOR > $RUNNER_TEMP/coverage.svg
 
     - name: Deploy Badges
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: Wandalen/wretry.action@master
       with:
-        commit_message: "Update badges [skip ci]"
-        branch: gh-pages
-        skip_fetch: true
-        skip_checkout: true
+        attempt_limit: 3
+        attempt_delay: 2000
+        command: |
+          git fetch origin gh-pages
+          git reset --hard origin/gh-pages
+          mkdir -p badges
+          mv $RUNNER_TEMP/coverage.svg badges/
+          git add badges/coverage.svg
+          git commit -m 'Update badges [skip ci]'
+          git push
 
     # Without this, will get Error:
     # Can't find 'action.yml', 'action.yaml' or 'Dockerfile' under '/home/runner/work/coverage-badge-action/coverage-badge-action/action.yml'.
