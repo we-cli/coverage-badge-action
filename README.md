@@ -1,6 +1,5 @@
 # coverage-badge-action&nbsp;&nbsp;[![cov](https://we-cli.github.io/coverage-badge-action/badges/coverage.svg)](https://github.com/we-cli/coverage-badge-action/actions)
 
-
 ## Similar Projects
 
 - https://github.com/jaywcjlove/coverage-badges-cli
@@ -14,25 +13,32 @@
 - ✅ Just patch and push to gh-pages
 - ✅ Supports Node.js & pytest
 
+## Todolist
+
+- [ ] avoid redandunt diff from equivalent svgs
+- [x] auto create deploy branch
+- [x] support gh-pages-debug for non-defuault branches
+- [x] fix case of concurrent jobs to deploy gh-pages
+
 ## Update: supports pytest
 
-    ```yml
-    # .github/workflows/test.yml
-    # ...
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
+```yml
+# .github/workflows/test.yml
+# ...
+- name: Set up Python 3.10
+  uses: actions/setup-python@v3
+  with:
+    python-version: "3.10"
 
-    - name: Install
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest pytest-cov
-        pip install -r requirements.txt
-    - name: Test and Coverage
-      run: python -m pytest --cov --cov-report json
-    # ...
-    ```
+- name: Install
+  run: |
+    python -m pip install --upgrade pip
+    pip install pytest pytest-cov
+    pip install -r requirements.txt
+- name: Test and Coverage
+  run: python -m pytest --cov --cov-report json
+# ...
+```
 
 ## Usage
 
