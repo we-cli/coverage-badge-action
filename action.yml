@@ -31,10 +31,18 @@ runs:
         git config user.name github-actions[bot]
         git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-    - name: Checkout gh-pages
+    - name: Pick Deploy Branch
+      id: pick-deploy-branch
+      shell: bash
+      run: |
+        IS_DEFAULT_BRANCH=${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+        DEPLOY_BRANCH=$([ "$IS_DEFAULT_BRANCH" = true ] && echo 'gh-pages' || echo 'gh-pages-debug')
+        echo "deploy_branch=$DEPLOY_BRANCH" >> $GITHUB_OUTPUT
+
+    - name: Checkout ${{ steps.pick-deploy-branch.outputs.deploy_branch }}
       uses: actions/checkout@v3
       with:
-        ref: gh-pages
+        ref: ${{ steps.pick-deploy-branch.outputs.deploy_branch }}
 
     - name: Create Badges
       shell: bash
@@ -51,8 +59,8 @@ runs:
         attempt_limit: 3
         attempt_delay: 2000
         command: |
-          git fetch origin gh-pages
-          git reset --hard origin/gh-pages
+          git fetch origin ${{ steps.pick-deploy-branch.outputs.deploy_branch }}
+          git reset --hard origin/${{ steps.pick-deploy-branch.outputs.deploy_branch }}
           mkdir -p badges
           mv $RUNNER_TEMP/coverage.svg badges/
           git add badges/coverage.svg
