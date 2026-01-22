@@ -48,7 +48,7 @@ runs:
         fi
 
     - name: Checkout ${{ steps.pick-deploy-branch.outputs.deploy_branch }}
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         ref: ${{ steps.pick-deploy-branch.outputs.deploy_branch }}
 
@@ -79,6 +79,6 @@ runs:
     # Can't find 'action.yml', 'action.yaml' or 'Dockerfile' under '/home/runner/work/coverage-badge-action/coverage-badge-action/action.yml'.
     # Did you forget to run actions/checkout before running your local action?
     - name: Checkout Back
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         ref: ${{ github.ref }}
