@@ -26,7 +26,7 @@
 # .github/workflows/test.yml
 # ...
 - name: Set up Python 3.10
-  uses: actions/setup-python@v3
+  uses: actions/setup-python@v6
   with:
     python-version: "3.10"
 
@@ -85,8 +85,8 @@
         runs-on: ubuntu-latest
         steps:
           # Your original steps
-          - uses: actions/checkout@v3
-          - uses: actions/setup-node@v3
+          - uses: actions/checkout@v6
+          - uses: actions/setup-node@v6
           - name: Install
             run: npm install
           - name: Test and Coverage
