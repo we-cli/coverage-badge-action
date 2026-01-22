@@ -2,6 +2,8 @@ name: Test
 on: [push, pull_request, workflow_dispatch]
 jobs:
   test:
+    permissions:
+      contents: write # Update Coverage Badge needs write permission to push to gh-pages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
